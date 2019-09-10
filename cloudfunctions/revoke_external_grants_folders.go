@@ -18,8 +18,6 @@ limitations under the License.
 package cloudfunctions
 
 import (
-	"log"
-
 	"github.com/google/security-response-automation/clients"
 	"github.com/google/security-response-automation/entities"
 
@@ -61,7 +59,6 @@ func RevokeExternalGrantsFolders(ctx context.Context, m pubsub.Message, c client
 	remove := toRemove(f, disallowed)
 	for _, resource := range ancestors {
 		for _, folderID := range folderIDs {
-			log.Printf("%s - %s\n", resource, folderID)
 			if resource != "folders/"+folderID {
 				continue
 			}

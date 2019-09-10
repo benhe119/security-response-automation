@@ -19,7 +19,6 @@ package entities
 
 import (
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -66,7 +65,6 @@ func (h *Host) ListProjectSnapshot(projectID string) (*cs.SnapshotList, error) {
 
 // ListInstanceDisks returns a list of disk names for a given instance.
 func (h *Host) ListInstanceDisks(projectID, zone, instance string) ([]*cs.Disk, error) {
-	log.Printf("attempt to list project snaphots: %s\n", projectID)
 	ds, err := h.c.ListDisks(projectID, zone)
 	if err != nil {
 		return nil, fmt.Errorf("failed to list disks: %q", err)

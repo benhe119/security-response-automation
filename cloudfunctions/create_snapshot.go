@@ -56,7 +56,7 @@ role on the affected project. At this time this grant is defined per project but
 be changed to support folder and organization level grants.
 */
 func CreateSnapshot(ctx context.Context, m pubsub.Message, c clients.Clients) error {
-	log.Println("starting")
+	log.Println("CreateSnapshot starting")
 	f := entities.NewFinding()
 	h := entities.NewHost(c)
 
@@ -69,17 +69,14 @@ func CreateSnapshot(ctx context.Context, m pubsub.Message, c clients.Clients) er
 	}
 
 	rule := strings.ReplaceAll(f.RuleName(), "_", "-")
-	log.Printf("rule: %s project: %s\n", rule, f.ProjectID())
 	disks, err := h.ListInstanceDisks(f.ProjectID(), f.Zone(), f.Instance())
 	if err != nil {
 		return fmt.Errorf("failed to list disks: %q", err)
 	}
-	log.Printf("found %d disks, get all snapshots for this project\n", len(disks))
 	snapshots, err := h.ListProjectSnapshot(f.ProjectID())
 	if err != nil {
 		return fmt.Errorf("failed to list snapshots: %q", err)
 	}
-	log.Printf("project: %s contains %d snapshots\n", f.ProjectID(), len(snapshots.Items))
 
 	for _, disk := range disks {
 		sn := fmt.Sprintf(snapshotTemplate, rule, disk.Name)
@@ -102,7 +99,7 @@ func CreateSnapshot(ctx context.Context, m pubsub.Message, c clients.Clients) er
 		}
 		// TODO(tomfitzgerald): Add metadata (indicators) to snapshot labels.
 	}
-	log.Println("done all")
+	log.Println("CreateSnapshot completed")
 	return nil
 }
 
