@@ -4,7 +4,7 @@ Cloud Functions to take automated actions on threat and vulnerability findings.
 
 ## Note
 
-This project is currently undevelopment and not yet ready for users. Stay tuned!
+This project is currently under development and is not yet ready for users. Stay tuned!
 
 ## Getting Started
 
@@ -27,10 +27,12 @@ $ terraform init
 $ terraform apply
 ```
 
-TIP: Instead of entering variables every time you can create `terraform.tfvars` file
-and input key value pairs there, i.e. `automation-project="aerial-jigsaw-235219"`.
+TIP: Instead of entering variables every time you can create `terraform.tfvars`
+file and input key value pairs there, i.e.
+`automation-project="aerial-jigsaw-235219"`.
 
-If at any point you want to revert the changes we've made just run `terraform destroy .`
+If at any point you want to revert the changes we've made just run `terraform
+destroy .`
 
 ### Test
 
